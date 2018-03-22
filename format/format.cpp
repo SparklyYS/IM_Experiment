@@ -5,6 +5,7 @@
 #include <fstream>
 #include <cstring>
 #include <iostream>
+#include "sfmt/SFMT.h"
 
 using namespace std;
 double uniformRand();
@@ -55,6 +56,8 @@ int main(int argc, char **argv)
     ofstream attrout(attrfile.c_str());
     ofstream out(outfile.c_str());
 
+    sfmt_t sfmt;
+
     attrout << n << " " << m << endl;
     if (flag == 0)
     {
@@ -64,18 +67,18 @@ int main(int argc, char **argv)
             {
                 int adj_vert = nodes[i][j];
                 double prob = 1.0 / inDeg[adj_vert]; // generate the probability as 1/d
-                out << i << " " << adj_vert << " " << 1.0 / inDeg[adj_vert] << endl;
+                out << i << " " << adj_vert << " " << prob << endl;
             }
         }
     }
     else if (flag == 1)
     {
-        srand((unsigned int)time(NULL));
+        sfmt_init_gen_rand(&sfmt, 96532);
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < nodes[i].size(); j++)
             {
-                double prob = rand() / (RAND_MAX + 1.0); // generate the probability between [0, 1)
+                double prob = sfmt_genrand_real1(&sfmt); // generate the probability between [0, 1)
                 out << i << " " << nodes[i][j] << " " << prob << endl;
             }
         }
@@ -87,7 +90,7 @@ int main(int argc, char **argv)
         {
             for (int j = 0; j < nodes[i].size(); j++)
             {
-                srand((unsigned int) time(NULL));
+                srand((unsigned int)time(NULL));
                 double prob = normalRand(mean, sigma);
                 out << i << " " << nodes[i][j] << " " << prob << endl;
             }

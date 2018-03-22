@@ -13,8 +13,8 @@ const int LIMIT = 10000;
 vector<double> vec[MAXN];
 void CalculateSum(Graph &g, int idx);
 
-string attr_file;
-string graph_file;
+string attr_file;  // the attribute file contain nodes and edges
+string graph_file; // the graph file contain the graph
 int main(int argc, char **argv)
 {
     for (int i = 0; i < argc; i++)
@@ -76,7 +76,7 @@ int main(int argc, char **argv)
         }
     }
 
-    int snode;
+    int snode; // sample node
     srand((unsigned int)time(NULL));
     for (int i = 0; i < LIMIT; i++)
     {

@@ -1,17 +1,13 @@
 #ifndef GRAPH_H
 #define GRAPH_H
-#include <vector>
-#include <cstdio>
-#include <cstring>
-#include <iostream>
-#include <fstream>
+#include "head.h"
 
 using namespace std;
 
 class Graph
 {
-  public: 
-    int n, m; 
+  public:
+    int n, m;
     vector< vector<int> > gT;
     vector< vector<double> > probT;
 

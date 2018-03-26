@@ -1,16 +1,10 @@
-#include <vector>
-#include <cstdio>
-#include <cstdlib>
-#include <ctime>
-#include <cstring>
-#include <iostream>
+#include "head.h"
 #include "graph.h"
+#include "ganalyze.h"
 
 const string res_file = "res.txt";
-const int MAXN = 11;
-const int LIMIT = 10000;
 
-vector<double> vec[MAXN];
+vector< vector<double> > vec;
 void CalculateSum(Graph &g, int idx);
 
 string attr_file;  // the attribute file contain nodes and edges
@@ -41,12 +35,13 @@ int main(int argc, char **argv)
     cout << "begin to init vec...." << endl;
     for (int i = 0; i < MAXN; i++)
     {
-        for (int j = 0; j < graph.n; j++)
-        {
-            vec[i].push_back(0);
-        }
+        vec.push_back(vector<double>(graph.n, 0));
     }
     cout << "init vec Over..." << endl;
+
+    cout << "start ganalyze..." << endl;
+    ganalyze::show();
+    cout << "end ganalyze..." << endl;
 
     double start, finish;
     start = clock();

@@ -24,6 +24,17 @@ class Graph
         }
     }
 
+    Graph(string attr, string graph_file)
+    {
+        readNM(attr);
+        for (int i = 0; i < n; i++)
+        {
+            gT.push_back(vector<int>());
+            probT.push_back(vector<double>());
+        }
+        readGraph(graph_file);
+    }
+
     void readNM(string attr)
     {
         ifstream in(attr.c_str());
